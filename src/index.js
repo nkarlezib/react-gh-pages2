@@ -12,7 +12,7 @@ const io = new Server(server);
 //settings
 app.engine('html', engine);
 app.set('view engine', 'html');
-app.set('public', path.join(__dirname, 'public'));
+app.use(express.static('assets'))
 
 app.use(require('./routes/index.js'));
 app.use(express.static(path.join(__dirname, './')));
