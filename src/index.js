@@ -15,7 +15,6 @@ app.set('view engine', 'html');
 app.use(express.static('assets'))
 
 app.use(require('./routes/index.js'));
-app.use(express.static(path.join(__dirname, './')));
 
 io.sockets.on('connection', (socket) => {  
     socket.on('CHAT', (msg) => {
