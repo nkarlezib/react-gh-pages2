@@ -61,11 +61,6 @@ socket.emit('TRUCKS',{
 }
 );
 
-socket.emit('FAILURE',{
-    code: String,
-    status: String
-});
-
 socket.on('TRUCKS', function(msg) {
     msg.forEach((element) =>{
         var l = 0;
@@ -108,11 +103,12 @@ socket.on('FAILURE', function(mng) {
     var linea = document.getElementById(code);
     linea.innerHTML = `<strong> ${code} </strong> :<strong style="background-color:RED;"> FAILURE </strong>: ${source} <button id = fix${code}> FIX </button>`;
     document.getElementById(`fix${code}`).addEventListener("click", function() {
+        socket.emit('FIX',{
+            code: code
+        });
     });
 })
-socket.emit('FIX',{
-    code: code
-});
+
 socket.on('FIX', function(msg){
     var linea = document.getElementById(msg.code);
     linea.innerHTML = `<strong> ${msg.code} </strong> :  ->  <small style="background-color:green;"> OK </small> `;
