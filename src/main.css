@@ -1,0 +1,81 @@
+#mapid{
+    height: 600px;
+    width: 50%;
+    background-color: black;
+}
+
+body { margin: 0; 
+    padding-bottom: 3rem; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+ }
+
+#form { 
+    background: rgba(0, 0, 0, 0.15); 
+    padding: 0.25rem; 
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    height: 3rem; 
+    width: 50%;
+    box-sizing: border-box; 
+    backdrop-filter: blur(10px); 
+}
+#message, #username{ 
+    border: none; 
+    padding: 0 1rem; 
+    flex-grow: 1; 
+    border-radius: 2rem; 
+    margin: 0.25rem; 
+    width: 210px;
+    height: 30px;
+}
+
+#input:focus { 
+    outline: none; 
+}
+
+#form > button {
+     background: #333; 
+     border: none; 
+     padding: 0 1rem; 
+     margin: 0.25rem; border-radius: 3px; 
+     outline: none; 
+     color: #fff; 
+     height: 20px;
+    }
+
+#messages { 
+    list-style-type: none; 
+    position: absolute; 
+    bottom: 30px; 
+    right: 0; 
+    padding: 0; 
+    height: 300px;
+    width: 600px;
+    border-top: solid;
+    border-top-width: 1px;
+}
+#messages > li { 
+    padding: 0.5rem 1rem; 
+}
+#messages > li:nth-child(odd) {
+     background: #efefef; 
+    }
+
+#info { 
+    list-style-type: none; 
+    position: absolute; 
+    margin:0;
+    top: 0; 
+    right: 0; 
+    padding: 0; 
+    height: 254px;
+    width: 600px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+#info > li { 
+    padding: 0.5rem 1rem; 
+}
+#info > li:nth-child(odd) {
+        background: #efefef; 
+    }

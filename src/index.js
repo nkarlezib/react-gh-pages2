@@ -1,17 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+const express = require('express');
+const react = require('react');
+const app = express();
+const engine = require('ejs-mate');
+const path = require('path');
+const http = require('http');
+const server = http.createServer(app);
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const { Server, Socket } = require("socket.io");
+const io = new Server(server);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+//settings
+app.engine('html', engine);
+app.set('view engine', 'html');
+app.set('public', path.join(__dirname, 'public'));
+
+app.use(require('./routes/index.js'));
+app.use(express.static(path.join(__dirname, './')));
+
+io.sockets.on('connection', (socket) => {  
+    socket.on('CHAT', (msg) => {
+        var date = new Date;
+        var minutes = date.getMinutes();
+        var hour = date.getHours();
+        var today = hour + ':' + minutes;
+        io.emit('CHAT',{
+            message: msg.message,
+            name: msg.name,
+            date: today
+        });
+    });
+
+    socket.on('FIX', msg => {
+        io.emit('FIX', {
+            code: msg.code
+        })
+    })
+  });
+
+server.listen(3000, (sockets) => {
+    console.log("listening on port 3000");
+})
