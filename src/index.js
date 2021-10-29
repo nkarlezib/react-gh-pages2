@@ -25,7 +25,7 @@ io.sockets.on('connection', (socket) => {
         io.emit('CHAT',{
             message: msg.message,
             name: msg.name,
-            date: today
+            date: msg.date
         });
     });
 

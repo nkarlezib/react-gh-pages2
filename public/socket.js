@@ -34,7 +34,11 @@ form.addEventListener('submit', function(e) {
 
 socket.on('CHAT', function(msg) {
     var item = document.createElement('li');
-    item.innerHTML = `<strong> ${msg.name} </strong> : ${msg.message} <small> ${msg.date} </small>`;
+    var date = new Date;
+    var minutes = date.getMinutes();
+    var hour = date.getHours();
+    var today = hour + ':' + minutes;
+    item.innerHTML = `<strong> ${msg.name} </strong> : ${msg.message} <small> ${today} </small>`;
     messages.appendChild(item);
 });
 
@@ -84,7 +88,7 @@ socket.on('TRUCKS', function(msg) {
 
         }
         else{
-            item.innerHTML = `<strong> ${id} </strong> : ${origin} -> ${destination} <small style="background-color:green;"> OK </small>`;
+            item.innerHTML = `<strong> ${id} </strong> : <small style="background-color:green;"> OK </small>`;
             item.id = id;
         }
         camiones.appendChild(item);
