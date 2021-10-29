@@ -113,4 +113,3 @@ socket.on('FIX', function(msg){
     linea.innerHTML = `<strong> ${msg.code} </strong> :  ->  <small style="background-color:green;"> OK </small> `;
 })
 
-//Hacer seccion fix y estados y cuando se apreta el boton fix, enviamos la señak FIX AL SERVIDOR con el ID 
