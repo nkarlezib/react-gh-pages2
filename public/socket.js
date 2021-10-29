@@ -9,18 +9,13 @@ var message = document.getElementById('message');
 var messages = document.getElementById('messages');
 var camiones = document.getElementById('info');
 
+var trucks = {};
+
 const mymap = L.map('mapid').setView([-22.451851, -69.38074], 8);
 var camion1;
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 
-mymap.locate({enableHighAccuracy: true});
-mymap.on('locationfound', e => {
-    const coords = [e.latlng.lat, e.latlng.lng];
-    const marker = L.marker(coords);
-    marker.bindPopup('You are here');
-    mymap.addLayer(marker);
-});
 
 
 form.addEventListener('submit', function(e) {
@@ -46,10 +41,8 @@ socket.on('CHAT', function(msg) {
 socket.on("POSITION", function(msg) {
     var id = msg.code;
     var position = msg.position;
-    var marker = L.marker(position);
-    marker.setLatLng(position);
-    marker.bindPopup(id);
-    mymap.addLayer(marker);
+    trucks[id].setLatLng(position);
+    
 });
 
 socket.emit('TRUCKS',{
@@ -71,10 +64,12 @@ socket.on('TRUCKS', function(msg) {
         var driver_name = element.driver_name;
         var status = element.status;
         var start = L.marker(origin);
-        var inicio = L.marker(origin);
+        trucks[id] = L.marker(origin);
         var finish = L.marker(destination);
         latlngs.push(start.getLatLng());
         latlngs.push(finish.getLatLng());
+        mymap.addLayer(trucks[id]);
+        trucks[id].bindPopup(id);
         start.bindPopup("Start");
         finish.bindPopup("Finish");
         mymap.addLayer(start);
