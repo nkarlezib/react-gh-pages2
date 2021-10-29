@@ -94,7 +94,7 @@ socket.on('TRUCKS', function(msg) {
 
         }
         else{
-            item.innerHTML = `<strong> ${id} </strong> : ${origin} -> ${destination} <small style="background-color:green;"> OK </small> <button id = "fix" > Fix </button>`;
+            item.innerHTML = `<strong> ${id} </strong> : ${origin} -> ${destination} <small style="background-color:green;"> OK </small>`;
             item.id = id;
         }
         camiones.appendChild(item);
@@ -108,12 +108,11 @@ socket.on('FAILURE', function(mng) {
     var linea = document.getElementById(code);
     linea.innerHTML = `<strong> ${code} </strong> :<strong style="background-color:RED;"> FAILURE </strong>: ${source} <button id = fix${code}> FIX </button>`;
     document.getElementById(`fix${code}`).addEventListener("click", function() {
-        socket.emit('FIX',{
-            code: code
-        });
     });
 })
-
+socket.emit('FIX',{
+    code: code
+});
 socket.on('FIX', function(msg){
     var linea = document.getElementById(msg.code);
     linea.innerHTML = `<strong> ${msg.code} </strong> :  ->  <small style="background-color:green;"> OK </small> `;
