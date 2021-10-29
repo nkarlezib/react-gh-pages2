@@ -11,8 +11,7 @@ var camiones = document.getElementById('info');
 
 var trucks = {};
 
-const mymap = L.map('mapid').setView([-22.451851, -69.38074], 8);
-var camion1;
+const mymap = L.map('mapid').setView([-21.951851, -68.88074], 10);
 
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mymap);
 
@@ -88,7 +87,7 @@ socket.on('TRUCKS', function(msg) {
 
         }
         else{
-            item.innerHTML = `<strong> ${id} </strong> : <small style="background-color:green;"> OK </small>`;
+            item.innerHTML = `<strong> ${id} </strong> : STATUS: <small style="background-color:green;"> OK </small>`;
             item.id = id;
         }
         camiones.appendChild(item);
@@ -110,6 +109,6 @@ socket.on('FAILURE', function(mng) {
 
 socket.on('FIX', function(msg){
     var linea = document.getElementById(msg.code);
-    linea.innerHTML = `<strong> ${msg.code} </strong> :  ->  <small style="background-color:green;"> OK </small> `;
+    linea.innerHTML = `<strong> ${msg.code} </strong> :  STATUS:  <small style="background-color:green;"> OK </small> `;
 })
 
