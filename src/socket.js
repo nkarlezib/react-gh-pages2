@@ -94,7 +94,7 @@ socket.on('TRUCKS', function(msg) {
 
         }
         else{
-            item.innerHTML = `<strong> ${id} </strong> : ${origin} -> ${destination} <small style="background-color:green;"> OK </small>`;
+            item.innerHTML = `<strong> ${id} </strong> : ${origin} -> ${destination} <small style="background-color:green;"> OK </small> <button id = "fix" > Fix </button>`;
             item.id = id;
         }
         camiones.appendChild(item);
